@@ -1,0 +1,535 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Portafolio inmobiliario de Grupo Green">
+<title>Grupo Green | Portafolio inmobiliario</title>
+<style>
+:root{--green:#174b35;--green2:#236747;--ink:#17211b;--muted:#66736b;--paper:#f6f8f6;--line:#e2e9e3;--white:#fff}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;font-family:Arial,Helvetica,sans-serif;color:var(--ink);background:var(--paper)}
+button,input,select{font:inherit}.wrap{max-width:1180px;margin:auto;padding:0 22px}
+header{background:var(--green);color:white;padding:18px 0}
+.nav{display:flex;justify-content:space-between;align-items:center;gap:16px}.brand{font-weight:900;letter-spacing:2px;font-size:23px}.brand small{display:block;font-size:10px;font-weight:500;letter-spacing:3px;margin-top:4px;color:#d5e7db}
+.nav a{color:white;text-decoration:none;font-size:14px;margin-left:18px}
+.hero{background:linear-gradient(120deg,#123c2a,#236747);color:white;padding:68px 0 58px}
+.eyebrow{font-size:12px;letter-spacing:2px;text-transform:uppercase;color:#cde4d4;font-weight:bold}
+h1{font-size:clamp(34px,6vw,58px);line-height:1.04;margin:14px 0;max-width:760px}
+.hero p{color:#e0eee5;max-width:650px;line-height:1.65;font-size:17px}
+.hero-actions{display:flex;gap:12px;flex-wrap:wrap;margin-top:25px}
+.btn{border:0;border-radius:9px;padding:13px 18px;font-weight:bold;text-decoration:none;display:inline-flex;align-items:center;justify-content:center;cursor:pointer}
+.btn-light{background:white;color:var(--green)}.btn-outline{border:1px solid #b9d4c3;color:white;background:transparent}
+section{padding:42px 0}.section-head{display:flex;justify-content:space-between;align-items:end;gap:15px;margin-bottom:22px}
+h2{font-size:28px;margin:0 0 8px}.sub{color:var(--muted);margin:0;line-height:1.5}
+.filters{background:white;border:1px solid var(--line);padding:18px;border-radius:14px;display:grid;grid-template-columns:repeat(3,1fr) auto;gap:12px;margin:22px 0}
+label{font-size:12px;color:var(--muted);font-weight:bold;display:block;margin-bottom:7px}
+select,input{width:100%;border:1px solid var(--line);background:#fff;border-radius:8px;padding:12px;color:var(--ink)}
+.btn-green{background:var(--green);color:white}
+.count{font-size:13px;color:var(--muted);margin:8px 0 16px}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:18px}
+.card{background:white;border:1px solid var(--line);border-radius:14px;overflow:hidden;display:flex;flex-direction:column}
+.card-photo{height:190px;background:linear-gradient(135deg,#dce9df,#a9c6b2);position:relative;overflow:hidden}
+.card-photo img{width:100%;height:100%;object-fit:cover;display:block}
+.photo-tag{position:absolute;left:13px;top:13px;background:white;color:var(--green);font-size:11px;font-weight:bold;padding:7px 9px;border-radius:20px}
+.card-body{padding:17px;display:flex;flex-direction:column;gap:9px;flex:1}
+.card h3{font-size:19px;margin:0}.meta{font-size:13px;color:var(--muted)}
+.card p{font-size:14px;color:#536159;line-height:1.5;margin:0}
+.card .btn{margin-top:auto;width:100%}
+.empty{padding:35px;text-align:center;border:1px dashed #b8c9bd;border-radius:12px;color:var(--muted);grid-column:1/-1}
+.about{background:#eaf1ec}.steps{display:grid;grid-template-columns:repeat(3,1fr);gap:15px;margin-top:20px}
+.step{background:white;padding:20px;border-radius:12px;border:1px solid var(--line)}.step b{display:block;margin-bottom:8px}.step p{font-size:14px;color:var(--muted);line-height:1.5;margin:0}
+footer{background:#102f22;color:#eaf3ed;padding:30px 0}
+footer p{color:#c6d8cc;font-size:13px;line-height:1.5}
+.modal{display:none;position:fixed;inset:0;background:#071b12bb;z-index:5;padding:20px;overflow:auto}
+.modal.open{display:block}.dialog{background:white;max-width:850px;margin:25px auto;border-radius:16px;overflow:hidden}
+.modal-top{display:flex;justify-content:space-between;align-items:center;padding:16px 20px;border-bottom:1px solid var(--line)}
+.close{border:0;background:#edf2ee;border-radius:50%;width:36px;height:36px;font-size:22px;cursor:pointer}
+.detail{padding:22px}.detail h2{margin-bottom:5px}.detail p{line-height:1.6;color:#526057}
+.gallery{display:grid;grid-template-columns:2fr 1fr 1fr;gap:8px;margin:18px 0}.gallery img{width:100%;height:150px;object-fit:cover;border-radius:8px;background:#e7eee9}.gallery img:first-child{height:308px;grid-row:span 2}
+.info-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin:18px 0}.info-box{background:#f5f8f5;border-radius:10px;padding:15px}.info-box h3{font-size:15px;margin:0 0 8px}.info-box p{font-size:13px;margin:0}
+.map-frame{width:100%;height:300px;border:0;border-radius:10px;background:#edf2ee}
+.whatsapp-float{position:fixed;right:18px;bottom:18px;background:#1d8b50;color:white;text-decoration:none;border-radius:30px;padding:14px 18px;font-weight:bold;box-shadow:0 5px 20px #0002;z-index:4}
+@media(max-width:800px){.grid{grid-template-columns:repeat(2,1fr)}.filters{grid-template-columns:1fr 1fr}.filters .wide{grid-column:1/-1}.steps{grid-template-columns:1fr}.nav a{margin-left:8px}.gallery{grid-template-columns:1fr 1fr}.gallery img:first-child{grid-column:1/-1;grid-row:auto;height:210px}.gallery img{height:130px}}
+@media(max-width:540px){.wrap{padding:0 15px}.nav{align-items:flex-start}.nav-links{display:flex;flex-direction:column;gap:8px;text-align:right}.nav a{margin:0}.hero{padding:48px 0}.grid{grid-template-columns:1fr}.filters{grid-template-columns:1fr}.filters .wide{grid-column:auto}.section-head{display:block}.info-grid{grid-template-columns:1fr}.brand{font-size:20px}}
+</style>
+</head>
+<body>
+<header><div class="wrap nav">
+  <div class="brand">
+  <img src="green/mira1.png" alt="Logo Grupo Green"
+     style="width:170px;height:auto;display:block">
+  <small>PORTAFOLIO INMOBILIARIO</small>
+</div>
+ <div class="nav-links">
+  <a href="#proyectos">Proyectos</a>
+  <a href="#quienes-somos">Quiénes somos</a>
+  <a href="#por-que-elegirnos">Por qué elegirnos</a>
+  <a href="#contacto">Contacto</a>
+</div>
+</div></header>
+<div class="hero"><div class="wrap">
+  <div class="eyebrow">Tu próxima inversión empieza aquí</div>
+  <h1>Encuentra un proyecto que se adapte a tus planes.</h1>
+  <p>Explora nuestros proyectos inmobiliarios, conoce su ubicación, revisa fotografías y avances, y solicita asesoría para dar el siguiente paso.</p>
+  <div class="hero-actions"><a class="btn btn-light" href="#proyectos">Explorar proyectos</a><a class="btn btn-outline" id="heroWhats" href="#" target="_blank" rel="noopener">Hablar por WhatsApp</a></div>
+</div></div>
+<main> 
+<section id="quienes-somos" style="padding:60px 20px;background:#f4f6f2">
+  <div class="wrap" style="display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:35px;align-items:center">
+
+    
+<div style="background:#123d2b;border:3px solid #d5b77a;border-radius:15px;overflow:hidden;text-align:center;padding:18px">
+  
+  <div style="color:#ffffff;font-size:25px;font-weight:900;letter-spacing:4px">
+    GRUPO GREEN
+  </div>
+
+  <div style="color:#d5b77a;font-size:12px;letter-spacing:3px;margin:8px 0 15px">
+    GRUPO GREEN · GRUPO GREEN · GRUPO GREEN
+  </div>
+
+  <img src="socias/foto1.jpeg"
+       alt="Socias de Grupo Green"
+       style="width:100%;height:350px;object-fit:cover;object-position:center;border-radius:9px;display:block">
+
+  <div style="color:white;font-size:17px;font-weight:bold;margin-top:17px">
+    DOS SOCIAS, UNA VISIÓN Y UN PROPÓSITO
+  </div>
+
+  <div style="color:#d5b77a;font-size:13px;letter-spacing:3px;margin-top:9px">
+    GRUPO GREEN · PORTAFOLIO INMOBILIARIO
+  </div>
+
+</div>
+
+
+    <div>
+      <div class="eyebrow">Conoce Grupo Green</div>
+      <h2>¿Quiénes somos?</h2>
+      <p>Grupo Green nace para hacer más sencillo el camino hacia tu terreno o vivienda propia.</p>
+      <p>Sabemos que encontrar un proyecto inmobiliario puede ser complicado. Hay muchas ofertas, distintas condiciones y documentos que revisar. A veces no sabes por dónde empezar, qué proyecto elegir o en quién confiar.</p>
+      <p>Por eso nace Grupo Green: para hacer por ti ese trabajo que muchas veces resulta difícil y toma tanto tiempo.</p>
+      <p>Reunimos diferentes oportunidades inmobiliarias en un solo portafolio. Revisamos la información disponible de cada proyecto, sus características, documentación y condiciones, para ayudarte a tomar una decisión mejor informada.</p>
+      <p><strong>Dos socias, una visión y un propósito: ayudar a más familias a construir su futuro.</strong></p>
+    </div>
+
+  </div>
+</section>
+
+<section id="por-que-elegirnos" style="padding:60px 20px;background:#ffffff">
+  <div class="wrap">
+    <div class="section-head">
+      <div>
+        <h2>¿Por qué elegir Grupo Green?</h2>
+        <p class="sub">No tienes que buscar a ciegas. Nosotros te ayudamos a encontrar el camino.</p>
+      </div>
+    </div>
+
+    <div class="info-grid">
+      <div class="info-box">
+        <h3>Ahorras tiempo</h3>
+        <p>Encuentra diferentes proyectos en un solo lugar, sin tener que buscar por todas partes.</p>
+      </div>
+      <div class="info-box">
+        <h3>Información revisada</h3>
+        <p>Revisamos la información y documentación disponible de los proyectos que forman parte de nuestro portafolio.</p>
+      </div>
+      <div class="info-box">
+        <h3>Claridad para decidir</h3>
+        <p>Te mostramos precios, ubicaciones, condiciones y avances disponibles.</p>
+      </div>
+      <div class="info-box">
+        <h3>Te acompañamos</h3>
+        <p>Te orientamos para encontrar una alternativa que se adapte a tus posibilidades y objetivos.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="proyectos"><div class="wrap">
+  <div class="section-head"><div><h2>Encuentra tu proyecto</h2><p class="sub">Filtra por ubicación y tipo de inmueble.</p></div></div>
+  <div class="filters">
+    <div><label for="locationFilter">UBICACIÓN</label><select id="locationFilter"><option value="">Todas las ubicaciones</option></select></div>
+    <div><label for="typeFilter">¿QUÉ BUSCAS?</label><select id="typeFilter"><option value="">Todos los tipos</option><option>Terreno</option><option>Casa</option><option>Departamento</option><option>Techo Propio</option><option>Otros</option></select></div>
+    <div><label for="searchFilter">NOMBRE DEL PROYECTO</label><input id="searchFilter" placeholder="Ej. proyecto..."></div>
+    <div class="wide" style="display:flex;align-items:end"><button class="btn btn-green" id="clearFilters" style="width:100%">Limpiar filtros</button></div>
+  </div>
+  <div class="count" id="resultCount"></div>
+  <div class="grid" id="projectGrid"></div>
+</div></section>
+<section class="about" id="como-trabajamos"><div class="wrap">
+  <h2>Conoce cada proyecto de cerca</h2><p class="sub">Información clara para que puedas evaluar tu próxima compra o inversión.</p>
+  <div class="steps">
+    <div class="step"><b>01 · Conoce la historia</b><p>Revisa cómo inició el proyecto y qué etapas se han desarrollado.</p></div>
+    <div class="step"><b>02 · Revisa los avances</b><p>Consulta fotografías reales y actualizaciones que se incorporen a cada ficha.</p></div>
+    <div class="step"><b>03 · Explora la ubicación</b><p>Abre el mapa, revisa las calles y alrededores, y solicita indicaciones.</p></div>
+  </div>
+</div></section>
+<section id="contacto"><div class="wrap">
+  <h2>¿Necesitas asesoría?</h2><p class="sub">Cuéntanos qué buscas y te ayudaremos a encontrar una opción adecuada.</p>
+  <p style="margin-top:20px"><a class="btn btn-green" id="contactWhats" href="#" target="_blank" rel="noopener">Consultar por WhatsApp</a></p>
+</div></section>
+</main>
+<footer><div class="wrap"><div class="brand">GRUPO GREEN</div><p>Centro autorizado Fondo MiVivienda · Asesoría inmobiliaria</p><p>La información, disponibilidad, precios y condiciones deben confirmarse con un asesor antes de tomar una decisión.</p><small>© <span id="year"></span> Grupo Green</small></div></footer>
+<a class="whatsapp-float" id="floatWhats" href="#" target="_blank" rel="noopener">WhatsApp</a>
+<div class="modal" id="projectModal" role="dialog" aria-modal="true" aria-label="Detalle del proyecto">
+ <div class="dialog"><div class="modal-top"><b>Ficha del proyecto</b><button class="close" id="closeModal" aria-label="Cerrar">×</button></div><div class="detail" id="detailContent"></div></div>
+</div>
+<script>
+/* ===================== EDITA TUS PROYECTOS AQUÍ =====================
+   1. Duplica un bloque { ... } para agregar otro proyecto.
+   2. Cambia nombre, ubicación, tipo, descripción y fotos.
+   3. En fotos pega enlaces públicos directos a tus imágenes (jpg/png).
+   4. En mapa pega una dirección exacta o coordenadas para ubicarlo.
+   5. Deja fotos: [] si aún no tienes imágenes.
+===================================================================== */
+const WHATSAPP = "51944242083"; // Cambia el número si deseas otro. Formato: 51 + número, sin espacios.
+const PROJECTS = [
+ {
+  id:"buen-retiro", name:"Parque El Buen Retiro", location:"Ferreñafe", type:"Departamento",
+  status:"Segunda etapa de lanzamiento comercial", short:"Departamentos con techo propio en Ferreñafe, una oportunidad para construir tu futuro.",
+  price:"Desde S/ 20,990 al contado", area:"53,64m2", delivery:"12 meses",
+  start:"Parque El Buen Retiro nace con el propósito de brindar a las familias de Ferreñafe una oportunidad real de acceder a un departamento propio, mediante una propuesta inmobiliaria accesible y vinculada al programa Techo Propio. Desde su concepción, fue diseñado para ofrecer espacios funcionales, comodidad y una alternativa de vivienda para quienes buscan construir un futuro para su familia. Su desarrollo representa el compromiso de Grupo Green con el crecimiento urbano y habitacional de Ferreñafe.",
+  now:"Actualmente, Parque El Buen Retiro se encuentra en su segunda etapa de lanzamiento comercial. El proyecto cuenta con las licencias correspondientes para su construcción y contempla departamentos de 53,64 m², distribuidos en edificios de cuatro niveles más azotea.Contamos con departamentos disponibles en el segundo, tercer y cuarto piso, ubicados en Av. Takahashi, Ferreñafe.",
+  progress:"Ya iniciamos con la construccion de la primera etapa.",
+  progressPhotos: [
+  {
+    image:"imagenes/avances-buen-retiro/avance1.jpg",
+    date:"Noviembre 2026",
+    description:"Primer avance del proyecto."
+  },
+  {
+    image:"imagenes/avances-buen-retiro/avance2.jpg",
+    date:"Noviembre 2026",
+    description:"Avance de construcción."
+  }
+],
+  address:"Av. Takahashi, Ferreñafe, Lambayeque.",
+  maps:"https://maps.app.goo.gl/9KLitAci3fjmeuQN7", photos:[ "./imagenes/fachada.jpg",
+  "imagenes/sala.jpeg",
+  "imagenes/cocina.jpeg",
+  "imagenes/dormitorio.jpeg",
+  "imagenes/baño.jpeg",
+  "imagenes/cuarto.jpeg"]
+ },
+{
+  id:"las-begonias",
+  name:"Las Begonias – Urbanización",
+  location:"La Victoria",
+  type:"Terreno",
+  status:"Urbanización consolidada – primeras etapas entregadas",
+  short:"Lotes desde 90 m² en una hermosa urbanización con parques, etapas entregadas y familias que ya están construyendo su futuro.",
+  price:"Desde S/ 125,000 al contado con entrega inmediata. Opciones de financiamiento a 12 meses desde S/ 180,000 en adelante.",
+  area:"Lotes desde 90 m²",
+  delivery:"Entrega inmediata o a 12 meses, según modalidad",
+  start:"Las Begonias se desarrolla como una propuesta de habilitación urbana en La Victoria, Chiclayo, pensada para quienes buscan invertir en un terreno y construir su vivienda en una urbanización planificada.",
+  now:"El proyecto cuenta con sus primeras etapas entregadas, parques y familias que ya vienen construyendo sus viviendas. Una urbanización que muestra su crecimiento y desarrollo.",
+  progress:"Las primeras etapas han sido entregadas. La urbanización cuenta con parques y viviendas en proceso de construcción.",
+  address:"La Victoria, Chiclayo, Lambayeque. A 50 metros de la carretera Panamericana.",
+  maps:"https://maps.app.goo.gl/BsbWwFTPuUkvwbdA6",
+  photos:[
+    "begonias/foto1.jpeg",
+    "begonias/foto2.jpeg",
+    "begonias/foto3.jpeg"
+  ]
+},,
+ {
+  
+  id:"dunas-reque",
+  name:"Dunas de Reque",
+  location:"Reque",
+  type:"Casa",
+  status:"Preventa",
+  short:"Casas de dos pisos con Techo Propio en el sector La Clake, Reque. Una oportunidad para construir tu futuro y el de tu familia.",
+  price:"S/ 26,000 al contado | S/ 31,990 financiado",
+  area:"Terreno: 60 m² · Construcción: 50 m² en dos pisos",
+  delivery:"ENTREGAS 12 MESES / 18 MESES / 24 MESES / 30 MESES",
+  start:"Dunas de Reque nace con el propósito de ofrecer a las familias una alternativa de vivienda propia en una zona de crecimiento de Reque. El proyecto contempla casas de dos pisos, con una distribución funcional y una propuesta accesible mediante Techo Propio.",
+  now:"Actualmente, Dunas de Reque se encuentra en etapa de preventa. Está ubicado en el sector La Clake, Reque, una zona que cuenta con servicios básicos. Ofrecemos dos modalidades: S/ 26,000 al contado o S/ 31,990 financiado, con una inicial de S/ 5,000.",
+  progress:"Proyecto en etapa de preventa. Próximamente compartiremos fotografías y actualizaciones de sus avances.",
+  address:"Sector La Clake, Reque, Lambayeque.",
+  maps:"https://maps.app.goo.gl/J6m62DC5ABtupu5i7",
+  photos:[
+  "dunas de reque/foto1.jpeg",
+  "dunas de reque/foto2.jpeg",
+  "dunas de reque/foto3.jpeg"
+],
+
+ },
+ {
+  id:"ciudad-real",
+name:"Condominio Ciudad Real – Jayanca",
+location:"Jayanca",
+type:"Casa",
+status:"Desarrollo por etapas",
+short:"Un condominio que integra casas de dos pisos y departamentos, con parques, servicios y soluciones de diseño frente a las lluvias.",
+price:"CASAS: S/ 25,000 contado | S/ 27,990 financiado. DEPARTAMENTOS: S/ 19,990 contado | S/ 24,990 financiado.",
+area:"Casas: terreno 55 m² y construcción 59 m². Departamentos: 54 m² con 3 habitaciones.",
+delivery:"12 meses para la primera etapa",
+start:"Condominio Ciudad Real nace como una propuesta de vivienda para las familias de Jayanca. El proyecto contempla casas de dos pisos y departamentos en torres de cuatro pisos más azotea, además de parques y servicios básicos.",
+now:"El proyecto se desarrollará por etapas. La primera contempla 20 casas y una torre de 40 departamentos. Las casas tendrán una inicial de S/ 5,000 y los departamentos una inicial de S/ 3,000, según la modalidad de financiamiento.",
+progress:"El diseño contempla un sistema de drenaje pluvial, pendientes para facilitar el manejo de las aguas de lluvia y viviendas elevadas aproximadamente 1.50 metros respecto al nivel del terreno. Estas medidas buscan reducir la exposición de las viviendas ante posibles acumulaciones de agua.",
+address:"Jayanca, Lambayeque.",
+maps:"https://goo.gl/maps/gBd2jfW6gC6YT3js8?g_st=ac",
+photos:[
+  "ciudad real/foto1.jpeg",
+  "ciudad real/foto2.jpeg",
+  "ciudad real/foto3.jpeg",
+  "ciudad real/foto4.jpeg"
+],
+
+developer:"Entrecanales y Araujo SAC"
+},
+{
+  id:"casalina",
+  name:"Casalina – Pimentel",
+  location:"Pimentel",
+  type:"Casa",
+  status:"Proyecto en desarrollo – Código Techo Propio",
+  short:"Casas de un piso en Pimentel, cerca del balneario, con parques y áreas verdes.",
+  price:"Desde S/ 40,000. Financiamiento a 12 meses con inicial de S/ 10,000.",
+  area:"Terreno: 50 m². Construcción: 29 m².",
+  delivery:"Octubre de 2027",
+  start:"Casalina es un proyecto residencial ubicado al costado de la urbanización Las Dunas, en Pimentel.",
+  now:"El proyecto cuenta con código de Techo Propio. Actualmente se vienen ejecutando los trabajos de las redes de agua y desagüe.",
+  progress:"El proyecto contempla pistas, veredas, pórtico de ingreso, parques, áreas verdes y servicios básicos. Actualmente avanzan los trabajos de las redes de agua y desagüe.",
+  address:"Al costado de la urbanización Las Dunas, Pimentel, Lambayeque.",
+  maps:"https://maps.app.goo.gl/D8SKxiFaSwuWhBE27",
+  photos:[
+    "casalina/foto1.jpeg",
+    "casalina/foto2.jpeg",
+    "casalina/foto3.jpeg"
+  ]
+
+},
+{
+  id:"imperio-victoriano",
+  name:"Imperio Victoriano",
+  location:"La Victoria",
+  type:"Terreno",
+  status:"Lanzamiento de últimas etapas – Etapas 5 y 6",
+  short:"Lotes desde 90 m² en una habilitación urbana ubicada en una zona estratégica de La Victoria, Chiclayo, con proyección de crecimiento.",
+  price:"Financiamiento hasta 48 meses sin intereses, con inicial desde S/ 8,000. Consultar precio del lote.",
+  area:"Lotes desde 90 m² hasta 95 m²",
+  delivery:"Consultar condiciones de entrega",
+  start:"Imperio Victoriano nace como una propuesta de habilitación urbana en una zona privilegiada de La Victoria, Chiclayo, cerca de colegios, paraderos y servicios.",
+  now:"Estamos lanzando las últimas etapas 5 y 6. Las primeras etapas cuentan con redes de agua y desagüe, veredas y disponibilidad de energía eléctrica.",
+  progress:"El proyecto contempla pistas, veredas, parques y servicios básicos. Una de sus principales proyecciones es el recorrido de la futura avenida Imperio a través del proyecto, lo que representa un atractivo para el desarrollo urbano de la zona.",
+  address:"La Victoria, Chiclayo, Lambayeque. Al finalizar la proyección de la avenida Imperio.",
+  maps:"https://maps.app.goo.gl/KoHb9VA5KNCu9YNw6",
+  
+photos:[
+  "imperio/foto1.jpeg",
+  "imperio/foto2.jpeg"
+]
+},
+{
+  id:"valle-dorado",
+  name:"Lotización Valle Dorado – Pimentel",
+  location:"Pimentel",
+  type:"Terreno",
+  status:"Dos etapas – Lotes independizados",
+  short:"Lotes desde 90 m² en una zona de crecimiento de Pimentel, con parque y dos pórticos de ingreso.",
+  price:"Desde S/ 25,000. Inicial desde S/ 3,000 y financiamiento hasta 36 meses, con cuotas desde S/ 529.",
+  area:"Lotes desde 90 m²",
+  delivery:"Consultar disponibilidad",
+  start:"Valle Dorado es una lotización ubicada en una zona de crecimiento de Pimentel, pensada para quienes desean invertir o adquirir un terreno para construir su futuro.",
+  now:"El proyecto comprende dos etapas con lotes independizados, parque implementado y dos pórticos de ingreso.",
+  progress:"Cuenta con parque y dos pórticos de ingreso. Los lotes tienen factibilidad de servicios de agua y energía eléctrica.",
+  address:"Pimentel, Lambayeque.",
+  maps:"https://maps.app.goo.gl/JmCcBdB9Pi2cvD9p7",
+  
+photos:[
+  "valledorado/foto1.jpeg",
+  "valledorado/foto2.jpeg",
+  "valledorado/foto3.jpeg"
+]
+},
+{
+  id:"santa-cecilia",
+  name:"Santa Cecilia – Pimentel",
+  location:"Pimentel",
+  type:"Departamento",
+  status:"Preventa de segunda torre – Etapa 5",
+  short:"Departamentos de 50 m² a espaldas de la Universidad Señor de Sipán, con primera torre construida y vendida.",
+  price:"Desde S/ 79,990. Inicial desde S/ 5,000.",
+  area:"50 m²",
+  delivery:"12 meses",
+  start:"Santa Cecilia es un proyecto residencial con techo propio ubicado a espaldas de la Universidad Señor de Sipán, con acceso por la zona de La Ensenada, en Pimentel.",
+  now:"La primera torre ya se encuentra construida y vendida. Actualmente se inicia la preventa de la segunda torre, correspondiente a la etapa 5.",
+  progress:"La primera torre constituye una referencia construida del desarrollo. La segunda torre inicia su etapa de preventa, con entrega programada en 12 meses.",
+  address:"A espaldas de la Universidad Señor de Sipán, Pimentel, Lambayeque.",
+  maps:"https://maps.app.goo.gl/WbN6wnuiMpxu235q9",
+  
+photos:[
+  "santa cecilia/foto1.jpeg",
+  "santa cecilia/foto2.jpeg",
+  "santa cecilia/foto3.jpeg"
+]
+},
+{
+  id:"las-gardenias",
+  name:"Urbanización Las Gardenias",
+  location:"Chiclayo",
+  type:"Terreno",
+  status:"80% de avance – Últimos lotes",
+  short:"Habilitación urbana con servicios básicos y veredas ejecutadas. Últimos lotes desde 90 m².",
+  price:"Desde S/ 70,000. Inicial desde S/ 25,000 y financiamiento hasta 36 meses sin intereses.",
+  area:"Lotes desde 90 m²",
+  delivery:"Consultar condiciones de entrega e independización",
+  start:"Las Gardenias es una propuesta de habilitación urbana para quienes buscan invertir o construir su vivienda en una urbanización con importantes avances.",
+  now:"El proyecto registra aproximadamente 80% de avance. Ya cuenta con redes de agua, luz y desagüe, además de veredas.",
+  progress:"Se encuentran pendientes la ejecución de pistas y el proceso de independización de los lotes.",
+  address:"Consultar ubicación exacta del proyecto.",
+  maps:"https://maps.app.goo.gl/zxw188MbLKMEt2MF7",
+  photos:[
+    "gardenias/foto1.jpeg",
+    "gardenias/foto2.jpeg",
+    "gardenias/foto3.jpeg"
+  ]
+}
+];
+
+
+
+
+
+
+const $ = id => document.getElementById(id);
+const clean = s => String(s ?? "").replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;",'"':"&quot;","'":"&#39;"}[c]));
+const wa = (msg="Hola, quiero recibir información sobre sus proyectos inmobiliarios.") => `https://wa.me/${WHATSAPP}?text=${encodeURIComponent(msg)}`;
+$("heroWhats").href = $("contactWhats").href = $("floatWhats").href = wa();
+$("year").textContent = new Date().getFullYear();
+
+function mapSearch(p){return p.maps || (p.address ? `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(p.address)}` : `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(p.name+" "+p.location)}`);}
+function mapEmbed(p){const q=p.address || (p.name+" "+p.location);return `https://maps.google.com/maps?q=${encodeURIComponent(q)}&output=embed`;}
+function populateLocations(){
+ const sel=$("locationFilter"), vals=[...new Set(PROJECTS.map(p=>p.location).filter(Boolean))].sort();
+ vals.forEach(v=>{const o=document.createElement("option");o.value=v;o.textContent=v;sel.appendChild(o);});
+}
+function render(){
+ const loc=$("locationFilter").value, type=$("typeFilter").value, search=$("searchFilter").value.toLowerCase().trim();
+ const items=PROJECTS.filter(p=>
+  (!loc||p.location===loc)&&
+  (!type||(type==="Techo Propio"
+    ? (p.name+" "+p.short+" "+p.start+" "+p.now+" "+p.progress+" "+p.status).toLowerCase().includes("techo propio")
+    : p.type===type))&&
+  (!search||(p.name+" "+p.short+" "+p.location).toLowerCase().includes(search))
+);
+ $("resultCount").textContent=`${items.length} proyecto${items.length===1?"":"s"} encontrado${items.length===1?"":"s"}`;
+ $("projectGrid").innerHTML=items.length?items.map(p=>`
+ <article class="card">
+  <div class="card-photo">${p.photos?.[0]?`<img src="${clean(p.photos[0])}" alt="${clean(p.name)}" onerror="this.remove()">`:""}<span class="photo-tag">${clean(p.type)}</span></div>
+  <div class="card-body"><div class="meta">📍 ${clean(p.location)} · ${clean(p.status)}</div><h3>${clean(p.name)}</h3><p>${clean(p.short)}</p><div class="meta">${clean(p.price||"Consultar información")}</div><button class="btn btn-green" onclick="openProject('${clean(p.id)}')">Ver proyecto</button></div>
+ </article>`).join(""):`<div class="empty">No encontramos proyectos con esos filtros. Prueba otra ubicación o categoría.</div>`;
+}
+window.openProject = id => {
+ const p=PROJECTS.find(x=>x && x.id===id);; if(!p)return;
+ const imgs=(p.photos||[]).slice(0,3);
+ const gallery=imgs.length?`<div class="gallery">${imgs.map((src,i)=>`<img src="${clean(src)}" alt="Fotografía ${i+1} de ${clean(p.name)}">`).join("")}</div>`:`<div class="empty" style="margin:18px 0">Agrega las fotografías reales de este proyecto en la sección PROJECTS del archivo.</div>`;
+ $("detailContent").innerHTML=`
+ <h2>${clean(p.name)}</h2>
+ <p>📍 ${clean(p.location)} · ${clean(p.type)}</p>
+ ${gallery}
+
+${p.id==="casalina"?`
+<div style="margin:22px 0;padding:25px 18px;background:linear-gradient(135deg,#123d2b,#17633f);border:3px solid #d5b77a;border-radius:14px;text-align:center;color:white;box-shadow:0 5px 18px rgba(0,0,0,.15)">
+  <div style="font-size:30px;margin-bottom:8px">🏡</div>
+  <h2 style="color:#ffffff;font-size:25px;margin:5px 0">
+    ¡YA CONTAMOS CON CÓDIGO DE TECHO PROPIO!
+  </h2>
+  <p style="color:#ffffff;font-size:16px;margin:10px 0 0;line-height:1.5">
+    Casalina – Pimentel. Una oportunidad para acercarte a tu casa propia.
+  </p>
+</div>
+`:""}
+
+ ${p.id==="las-begonias"?`
+<div style="margin-top:25px;padding:22px;background:#123d2b;color:white;border-radius:12px">
+  <h2 style="color:white">LAS BEGONIAS: UNA URBANIZACIÓN QUE YA ES REALIDAD</h2>
+  <p style="color:white;line-height:1.7">
+    Un proyecto con primeras etapas entregadas, parques y familias que ya están construyendo sus hogares.
+  </p>
+  <div style="background:#d5b77a;color:#123d2b;padding:10px 14px;border-radius:6px;display:inline-block;font-weight:bold;margin:10px 0">
+    ✓ PRIMERAS ETAPAS ENTREGADAS
+  </div>
+  <h3 style="color:white">Invierte en una urbanización consolidada</h3>
+  <p style="color:white;line-height:1.7">
+    Lotes desde 90 m², con entrega inmediata o alternativas de financiamiento a 12 meses.
+  </p>
+  <p style="color:white"><strong>Ubicación:</strong> La Victoria, Chiclayo, a 50 metros de la Panamericana.</p>
+</div>
+`:""}
+ ${p.id==="dunas-reque"?`
+<div style="margin-top:25px;padding:20px;background:#123d2b;color:white;border-radius:12px">
+  <h2>LA PONCIANA INVESTMENT SAC</h2>
+  <h3>Conjunto Residencial Fragata – Tumbes</h3>
+  <p style="color:#ffffff;font-size:15px;line-height:1.6">
+La empresa desarrolladora de Dunas de Reque cuenta con la experiencia de un proyecto residencial entregado en Tumbes.
+</p>
+  <div style="background:#d5b77a;color:#123d2b;padding:8px 14px;border-radius:6px;display:inline-block;font-weight:bold;margin:10px 0">
+  ✓ PROYECTO RESIDENCIAL ENTREGADO
+</div>
+<div class="gallery">
+    <img src="fragata-tumbes/fragata1.jpeg" alt="Proyecto Fragata Tumbes">
+    <img src="fragata-tumbes/fragata2.jpeg" alt="Proyecto Fragata Tumbes">
+  </div>
+  <p><strong>Experiencia y respaldo para nuevos proyectos.</strong></p>
+</div>
+`:""}
+${p.id==="ciudad-real"?`
+<div style="margin-top:25px;padding:20px;background:#123d2b;color:white;border-radius:12px">
+  <h2 style="color:white">EMPRESA DESARROLLADORA</h2>
+  <h3 style="color:white">Entrecanales y Araujo SAC</h3>
+  <p style="color:white;font-size:15px;line-height:1.6">
+  La empresa desarrolladora de Condominio Ciudad Real también participa en el desarrollo de Parque El Buen Retiro, ubicado en Ferreñafe, Lambayeque.
+  </p>
+
+  <div style="background:#d5b77a;color:#123d2b;padding:8px 14px;border-radius:6px;display:inline-block;font-weight:bold;margin:10px 0">
+  ✓ PARQUE EL BUEN RETIRO – AVANCES DE OBRA
+  </div>
+
+  <div class="gallery">
+    <img src="AVANCES PBR/avance1.jpeg" alt="Avance de obra Parque El Buen Retiro">
+    <img src="AVANCES PBR/avance2.jpeg" alt="Avance de obra Parque El Buen Retiro">
+  </div>
+
+  <p style="color:white"><strong>Conoce el desarrollo de otro proyecto de la empresa.</strong></p>
+</div>
+`:""}
+ <div class="info-grid">
+  <div class="info-box"><h3>Información del proyecto</h3>
+   <p><b>Precio:</b> ${clean(p.price)}<br><b>Área:</b> ${clean(p.area)}<br><b>Entrega:</b> ${clean(p.delivery)}</p>
+  </div>
+  <div class="info-box">
+ <h3>Avances actuales</h3>
+ <p>${clean(p.progress)}</p>
+ ${p.id==="buen-retiro"?`
+ <div class="gallery">
+ <img src="avances-parque-buen-retiro/avance1.jpeg" loading="lazy" alt="Avance 1">
+<img src="avances-parque-buen-retiro/avance2.jpeg" loading="lazy" alt="Avance 2">
+<img src="avances-parque-buen-retiro/avance3.jpeg" loading="lazy" alt="Avance 3">
+ </div>
+ `:""}
+</div>
+  <div class="info-box"><h3>Cómo inició</h3><p>${clean(p.start)}</p></div>
+  <div class="info-box"><h3>Cómo estamos ahora</h3><p>${clean(p.now)}</p></div>
+ </div>
+ <p>
+  <a class="btn btn-green" href="${clean(mapSearch(p))}" target="_blank">Ver ubicación en Google Maps</a>
+  <a class="btn" href="${wa("Hola, deseo información sobre "+p.name+".")}" target="_blank">Consultar por WhatsApp</a>
+ </p>
+`;
+ $("projectModal").classList.add("open");document.body.style.overflow="hidden";
+};
+function closeModal(){$("projectModal").classList.remove("open");document.body.style.overflow="";}
+$("closeModal").addEventListener("click",closeModal);
+$("projectModal").addEventListener("click",e=>{if(e.target===$("projectModal"))closeModal();});
+document.addEventListener("keydown",e=>{if(e.key==="Escape")closeModal();});
+["locationFilter","typeFilter"].forEach(id=>$(id).addEventListener("change",render));
+$("searchFilter").addEventListener("input",render);
+$("clearFilters").addEventListener("click",()=>{$("locationFilter").value="";$("typeFilter").value="";$("searchFilter").value="";render();});
+populateLocations();render();
+</script>
+</body>
+</html>
